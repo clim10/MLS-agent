@@ -56,13 +56,13 @@ date_updated: '2026-03-18'
 #### Phase 2: Exploratory Data Analysis
 - Profile the dataset: shape, dtypes, missing values, cardinality, distributions
 - Insurance-specific checks:
-  - Policy status distribution (in-force, lapsed, surrendered, claimed, matured)
+  - Policy status distribution — system value `active` maps to business term "in-force"; full set: `active`, `lapsed`, `surrendered`, `claimed`, `matured`
   - Temporal patterns (seasonality in premiums, claims, lapses)
   - Premium payment frequency analysis
   - Age/gender/product-line distributions
   - Channel distribution (agency, bancassurance, direct)
 - Correlation analysis with target variable
-- Data quality assessment with severity ratings (Critical / Warning / Info)
+- Data quality assessment with severity ratings (Critical / Major / Warning)
 - Leakage detection: check for future-looking features, target-correlated IDs
 - PDPA check: flag NRIC, contact info, health data columns
 
@@ -88,7 +88,8 @@ date_updated: '2026-03-18'
 - Use MLflow for experiment tracking:
   ```python
   import mlflow
-  mlflow.set_experiment("/Users/{user}/experiment_name")
+  # Use /Shared/ path for team-accessible experiments (not personal /Users/{user}/)
+  mlflow.set_experiment("/Shared/manulife/{project_name}/experiments/{experiment_name}")
   with mlflow.start_run(run_name="descriptive_run_name"):
       mlflow.log_params(params)
       mlflow.log_metrics(metrics)

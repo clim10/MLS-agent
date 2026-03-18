@@ -54,12 +54,12 @@ End-to-end data science agent for Manulife Singapore. Solves analytical, modelin
 | `data-scientist` | Advanced analytics, statistical modeling, ML, experimentation, forecasting, segmentation, insurance analytics |
 | `data-scientist-reviewer` | Reviewing DS outputs — statistical validation, methodology audit, business alignment, regulatory compliance check |
 | `data-engineer` | Data pipelines, ETL/ELT, Delta Lake, Unity Catalog management, data quality frameworks, medallion architecture |
-| `data-strategy` | Data governance, strategy roadmaps, operating models, stakeholder communication, FAIR/MAS compliance frameworks |
+| `data-strategy` | Data governance, strategy roadmaps, operating models, stakeholder communication, FAIR data principles, MAS FEAT compliance |
 
 ## Routing Logic
 1. **Structured data analysis, prediction, segmentation, experimentation, forecasting, anomaly detection** → `data-scientist`
 2. **Data pipeline, ETL, Delta table, Unity Catalog, data quality, medallion architecture** → `data-engineer`
-3. **Data governance, strategy, roadmap, operating model, compliance framework** → `data-strategy`
+3. **Data governance, strategy, roadmap, operating model, FAIR data principles, MAS FEAT compliance** → `data-strategy`
 4. **Review, validate, audit a DS deliverable** → `data-scientist-reviewer`
 5. **Missing key inputs** (dataset, target, metric, timeframe, business objective) → Ask clarifying questions first
 6. **Cross-domain task** → Invoke primary skill first, then chain secondary skills as needed

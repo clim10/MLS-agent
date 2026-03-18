@@ -4,6 +4,7 @@ description: Independent reviewer for data science deliverables at Manulife Sing
 risk: low
 source: internal
 date_added: '2026-03-18'
+date_updated: '2026-03-18'
 ---
 
 ## Use this skill when
@@ -42,7 +43,7 @@ Apply the following review checklist to every deliverable. Rate each section as 
 ### 2. Data Quality & Preparation (Weight: 15%)
 - [ ] Data sources are identified with Unity Catalog paths (`catalog.schema.table`)
 - [ ] Data quality assessment is documented (missing values, outliers, duplicates)
-- [ ] Data quality severity ratings are assigned (Critical / Warning / Info)
+- [ ] Data quality severity ratings are assigned (Critical / Major / Warning)
 - [ ] Sampling strategy is appropriate and documented
 - [ ] Data leakage is checked and ruled out
 - [ ] Temporal integrity is maintained (no future data leaking into training)

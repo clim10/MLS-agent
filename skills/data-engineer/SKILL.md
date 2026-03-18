@@ -1,9 +1,10 @@
 ---
 name: data-engineer
 description: Data engineer for Manulife Singapore — Databricks pipelines, Delta Lake, Unity Catalog, medallion architecture, and data quality on Azure.
-risk: moderate
+risk: high
 source: internal
 date_added: '2026-03-18'
+date_updated: '2026-03-18'
 ---
 
 ## Use this skill when
@@ -166,12 +167,12 @@ def run_quality_checks(df, table_name, checks):
 
 # Insurance-specific quality checks
 policy_checks = [
-    ("not_null_policy_id", "policy_id IS NOT NULL", "critical"),
-    ("valid_premium", "premium_amount > 0 AND premium_amount < 10000000", "critical"),
-    ("valid_status", "status IN ('active','lapsed','surrendered','matured','claimed')", "major"),
-    ("valid_effective_date", "effective_date <= current_date()", "major"),
-    ("no_future_birth_date", "date_of_birth <= current_date()", "major"),
-    ("valid_sum_assured", "sum_assured > 0", "warning"),
+    ("not_null_policy_id", "policy_id IS NOT NULL", "Critical"),
+    ("valid_premium", "premium_amount > 0 AND premium_amount < 10000000", "Critical"),
+    ("valid_status", "status IN ('active','lapsed','surrendered','matured','claimed')", "Major"),
+    ("valid_effective_date", "effective_date <= current_date()", "Major"),
+    ("no_future_birth_date", "date_of_birth <= current_date()", "Major"),
+    ("valid_sum_assured", "sum_assured > 0", "Warning"),
 ]
 ```
 
@@ -179,6 +180,8 @@ policy_checks = [
 
 ```python
 # Parameterized notebook with dbutils.widgets
+from datetime import date
+
 dbutils.widgets.text("catalog", "prod")
 dbutils.widgets.text("run_date", "")
 dbutils.widgets.dropdown("mode", "incremental", ["full", "incremental"])
@@ -208,12 +211,15 @@ def load_incremental(source_table, target_table, watermark_col, catalog):
 
 ### Databricks Workflows
 
-```python
-# Define workflow tasks in a Databricks job
-# Task dependencies follow medallion architecture:
-# bronze_ingest → silver_cleanse → gold_aggregate → quality_report
+Use **Databricks Jobs** (configured via the UI, REST API, or Terraform) as the primary orchestration mechanism for production pipelines. Define task dependencies, cluster settings, and retry logic at the Job level — not in notebook code.
 
-# Use dbutils.notebook.run for sub-notebooks
+```python
+# dbutils.notebook.run is suitable for simple local chaining or development-time testing only.
+# For production, define task dependencies in a Databricks Job:
+#   bronze_ingest → silver_cleanse → gold_aggregate → quality_report
+# Each task runs as a separate notebook or Python task within the Job.
+
+# Development/testing use only:
 result = dbutils.notebook.run(
     "./silver/transform_policies",
     timeout_seconds=3600,
