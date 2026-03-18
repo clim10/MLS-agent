@@ -1,0 +1,14 @@
+
+{
+  // Hide everything ignored by .gitignore
+  "explorer.excludeGitIgnore": true,
+
+  // Keep the explorer focused on repo intent
+  "files.exclude": {
+    "**/.git": true
+  },
+
+  // Markdown quality-of-life (useful for agents/skills)
+  "markdown.preview.breaks": true,
+  "markdown.preview.linkify": true
+}

@@ -10,11 +10,13 @@
 !CODEOWNERS
 
 # Allow these directories
+!/.vscode/
 !/agents/
 !/instructions/
 !/skills/
 
 # Allow files inside the allowed directories
+!.vscode/**
 !/agents/**
 !/instructions/**
 !/skills/**
